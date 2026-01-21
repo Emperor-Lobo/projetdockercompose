@@ -1,0 +1,42 @@
+services:
+  tor:
+    image: dperson/torproxy
+    container_name: tor
+    restart: unless-stopped
+    environment:
+      - LOCATION=FR
+      - STRICT=1
+      - TOR_MaxCircuitDirtiness=600
+    mem_limit: 256m
+    networks:
+      - tor_net
+      - public_net
+
+  backend:
+    build: ./backend
+    container_name: ex03_backend
+    depends_on:
+      - tor
+    environment:
+      - HTTP_PROXY=socks5h://tor:9050
+      - HTTPS_PROXY=socks5h://tor:9050
+    ports:
+      - "5000:5000"
+    networks:
+      - tor_net
+      - public_net
+
+  frontend:
+    build: ./frontend
+    container_name: ex03_frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    networks:
+      - public_net
+
+networks:
+  tor_net:
+    internal: true
+  public_net:

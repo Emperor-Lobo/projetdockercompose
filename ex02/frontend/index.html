@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users CRUD</title>
+</head>
+<body>
+<h1>Users</h1>
+
+<input id="username" placeholder="username">
+<input id="password" placeholder="password">
+<button onclick="createUser()">Create</button>
+
+<ul id="users"></ul>
+
+<script>
+function loadUsers() {
+    fetch("/users")
+        .then(res => res.json())
+        .then(data => {
+            users.innerHTML = "";
+            data.forEach(u => {
+                users.innerHTML += `
+                    <li>
+                        ${u.id} - ${u.username}
+                        <button onclick="deleteUser(${u.id})">X</button>
+                    </li>`;
+            });
+        });
+}
+
+function createUser() {
+    fetch("/users", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: username.value,
+            password: password.value
+        })
+    }).then(() => {
+        username.value = "";
+        password.value = "";
+        loadUsers();
+    });
+}
+
+function deleteUser(id) {
+    fetch("/users/" + id, { method: "DELETE" })
+        .then(loadUsers);
+}
+
+loadUsers();
+</script>
+</body>
+</html>

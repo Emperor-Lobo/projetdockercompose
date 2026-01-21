@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ex03 - Users via Tor</title>
+</head>
+
+<body>
+  <h1>Users</h1>
+  <ul id="list"></ul>
+
+  <script>
+    fetch("/users")
+      .then(r => r.json())
+      .then(data => {
+        const ul = document.getElementById("list");
+        ul.innerHTML = "";
+        data.forEach(u => {
+          ul.innerHTML += `
+            <li>
+              <img src="${u.photo}" width="50">
+              ${u.name}
+            </li>
+          `;
+        });
+      })
+      .catch(() => {
+        document.getElementById("list").innerHTML =
+          "<li>Erreur backend / Tor</li>";
+      });
+  </script>
+</body>
+</html>
