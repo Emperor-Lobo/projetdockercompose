@@ -4,13 +4,10 @@ Ce dépôt contient une suite de 4 exercices Docker Compose illustrant la monté
 
 Chaque exercice est indépendant et possède son propre :
 
-docker-compose.yml
-
-Makefile
-
-.env
-
-README.md
+- docker-compose.yml
+- backend
+- frontend
+- Makefile
 
 Les exercices peuvent être exécutés séparément.
 
