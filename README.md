@@ -26,7 +26,7 @@ projetdockercompose/
 
 ---
 
-#Objectifs pédagogiques
+# Objectifs pédagogiques
 
 | Exercice | Contenu                                                                          |
 | -------- | -------------------------------------------------------------------------------- |
