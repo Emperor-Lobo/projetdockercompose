@@ -14,12 +14,13 @@ Les exercices peuvent être exécutés séparément.
 ---
 
 # Structure du dépôt
-
+```bash
 projetdockercompose/
 ├── ex01/ # Backend + Frontend simple
 ├── ex02/ # Ajout d’une base de données (SQLite)
 ├── ex03/ # Ajout de Tor + réseaux Docker
 ├── ex04/ # Architecture complète (Tor + PostgreSQL + PgAdmin)
+```
 
 ---
 
